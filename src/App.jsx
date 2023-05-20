@@ -5,6 +5,12 @@ const App = () => {
   const [count, setCount] = useState(1);
   const [text, setText] = useState([]);
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    let amount = parseInt(count);
+    setText(textdata.slice(0, amount));
+  };
+
   const handleChange = (event) => {
     setCount(event.target.value);
   };
@@ -12,7 +18,7 @@ const App = () => {
   return (
     <section className="section-center">
       <h4>hipster ipsum</h4>
-      <form className="lorem-form">
+      <form className="lorem-form" onSubmit={handleSubmit}>
         <label htmlFor="amount">paragraphs:</label>
         <input
           type="number"
@@ -28,6 +34,11 @@ const App = () => {
           generate
         </button>
       </form>
+      <div className="lorem-text">
+        {text.map((paragraph, index) => {
+          return <p key={index}>{paragraph}</p>;
+        })}
+      </div>
     </section>
   );
 };
